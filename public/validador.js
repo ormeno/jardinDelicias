@@ -15,7 +15,6 @@ let account;
 let MyCoin;
 
 function init() {
-  //alert('1')
   if (typeof window.ethereum !== 'undefined') {
     const metamaskBtn = document.getElementById('enableEthereumButton');
     metamaskBtn.classList.remove('d-none');
@@ -40,7 +39,13 @@ function init() {
       //document.getElementById('login').style.display = 'none';
       //document.getElementById('main').classList.remove('d-none');
     });
-  } 
+  }  else {
+     Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: '¡Necesitas tener Metamask instalado!'
+    });
+  }
 }
 
 function detectChangeAccount(){
