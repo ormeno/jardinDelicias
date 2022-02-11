@@ -1,0 +1,26 @@
+  <button id="enableEthereumButton" class="btn btn-warning text-white d-none">Conectar Metamask</button>
+  <p id="accountSelected" class="text-end p-4"></p>
+
+  <div>
+
+      <br><br><br>
+      <h1 class="text-center mb-5">Validador NFTs ROJ</h1>
+
+      <br>
+
+      <p class="text-center">Validador de Tokens:</p>
+      <div class="text-center imput group mb-3">
+          <!-- <input id="addressGetBalance" type="text" class="form-control" placeholder="Introduce una cuenta "></input>-->
+          <button class="btn btn-success" type="button" id="btnValidador">VALIDADOR</button>
+          <p class="col-12 text-center p-3 h6 bg-secondary text-white mt-3">Tokens ID: <span id="balance"> </p>
+      </div>
+
+      <br><br><br>
+    </div>
+{{#if listExists}} 
+  <ul>
+    {{#each suggestedChamps}}
+      <li class={{this.lane}}>{{this.name}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
