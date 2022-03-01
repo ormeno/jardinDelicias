@@ -11,6 +11,9 @@ const Toast = Swal.mixin({
   showConfirButton: false,
   timer: 2000,
   timerProgressBar: false */
+  imageWidth: 425,
+  imageHeight: 475,
+  imageAlt: 'Custom image'
 });
 
 let web3;
@@ -66,10 +69,9 @@ function init() {
     });
   }  else {
      Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
+      title: '¡Metamask no instalado!',
       position: 'top',
-      text: '¡Necesitas tener Metamask instalado!'
+      text: 'Esta web interactua con la blockchain de Polygon, por lo que es necesario que su navegador tenga instalado Metamask'
     });
   }
 }
@@ -109,10 +111,7 @@ function consultarColeccion(idColeccion) {
       Toast.fire({
         title: 'Nombre: ' + res.nombre,
         text: 'Total: ' + res.total + ' - Total vendidos: ' + res.totalVendidos,
-        imageUrl: res.url,
-        imageWidth: 450,
-        imageHeight: 500,
-        imageAlt: 'Custom image'
+        imageUrl: res.url
       })
      }
     }).catch(e=>{
@@ -203,10 +202,7 @@ function interact() {
                         Toast.fire({
                           icon: 'success',
                           title: '¡¡ ENHORABUENA, SU NFT ESPECIAL !!',
-                          imageUrl: res2.url,
-                          imageWidth: 450,
-                          imageHeight: 500,
-                          imageAlt: 'Custom image',
+                          imageUrl: res2.url
                          })
                       } else {
                         Toast.fire({
@@ -277,9 +273,6 @@ function interact() {
                   title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[0].nombre,
                   text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[0].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[0].totalVendidos,
                   imageUrl: res.events.SobreVendido.returnValues.coleccionOut[0].url,
-                  imageWidth: 450,
-                  imageHeight: 500,
-                  imageAlt: 'Custom image',
                   confirmButtonText: 'Siguiente'
               }).then((result) => {
                 if (result.isConfirmed) {
@@ -287,9 +280,6 @@ function interact() {
                     title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[1].nombre,
                     text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[1].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[1].totalVendidos,
                     imageUrl: res.events.SobreVendido.returnValues.coleccionOut[1].url,
-                    imageWidth: 450,
-                    imageHeight: 500,
-                    imageAlt: 'Custom image',
                     confirmButtonText: 'Siguiente'
                   }).then((result) => {
                     if (result.isConfirmed) {
@@ -297,9 +287,6 @@ function interact() {
                         title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[2].nombre,
                         text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[2].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[2].totalVendidos,
                         imageUrl: res.events.SobreVendido.returnValues.coleccionOut[2].url,
-                        imageWidth: 450,
-                        imageHeight: 500,
-                        imageAlt: 'Custom image',
                         confirmButtonText: 'Siguiente'
                       }).then((result) => {
                         if (result.isConfirmed) {
@@ -307,19 +294,13 @@ function interact() {
                             title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[3].nombre,
                             text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[3].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[3].totalVendidos,
                             imageUrl: res.events.SobreVendido.returnValues.coleccionOut[3].url,
-                            imageWidth: 450,
-                            imageHeight: 500,
-                            imageAlt: 'Custom image',
                             confirmButtonText: 'Siguiente'
                           }).then((result) => {
                             if (result.isConfirmed) {
                               Toast.fire({
                                 title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[4].nombre,
                                 text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[4].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[4].totalVendidos,
-                                imageUrl: res.events.SobreVendido.returnValues.coleccionOut[4].url,
-                                imageWidth: 450,
-                                imageHeight: 500,
-                                imageAlt: 'Custom image'
+                                imageUrl: res.events.SobreVendido.returnValues.coleccionOut[4].url
                               })
                             }
                           })
