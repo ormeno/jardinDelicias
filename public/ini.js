@@ -99,7 +99,7 @@ function contract() {
 
 function consultarColeccion(idColeccion) {
   try{
-    console.log('consultarColeccion id:', idColeccion );
+    console.log('consultarColeccion id:', './img/cromos/' + idColeccion + '.png' );
     NftRoj.methods.getColeccion(idColeccion).call().then(res => {
     if (res.nombre==='') {
       Toast.fire({
@@ -111,7 +111,7 @@ function consultarColeccion(idColeccion) {
       Toast.fire({
         title: 'Nombre: ' + res.nombre,
         text: 'Total: ' + res.total + ' - Total vendidos: ' + res.totalVendidos,
-        imageUrl: res.url
+        imageUrl: './img/cromos/' + idColeccion + '.png'
       })
      }
     }).catch(e=>{
@@ -183,26 +183,18 @@ function interact() {
         const addressValueOri = document.getElementById('accountSelected').textContent;
         console.log('addressValueOri:  ', addressValueOri);
         NftRoj.methods.walletOfOwner(addressValueOri).call().then(res => {
-          console.log('res walletOfOwner: ',res);
           if (res.tieneTodos) {
-            console.log('idNTFEspecial:',idNTFEspecial)
             NftRoj.methods.getColeccion(idNTFEspecial).call().then(res2 => {
-              console.log('res2',res2);
-              console.log('numNFTEsp:',numNFTEsp);
               if (res2.totalVendidos<numNFTEsp) {
-                console.log('res2-2');
                 NftRoj.methods.balanceOf(addressValueOri,idNTFEspecial).call().then(res3 => {
-                  console.log('res3',res3);
                   if (res3==0) {
                     NftRoj.methods.buyEspecial().send({ from: addressValueOri, to:addressContract}).then(resEsp => {
-                      console.log('Dentro especial ');
-                      console.log('resEsp: ',resEsp);
                       if (resEsp.status) {
-                        console.log('ok buyEspecial ');
                         Toast.fire({
                           icon: 'success',
                           title: '¡¡ ENHORABUENA, SU NFT ESPECIAL !!',
-                          imageUrl: res2.url
+                          //imageUrl: res2.url
+                          imageUrl: './img/cromos/999.png'
                          })
                       } else {
                         Toast.fire({
@@ -259,9 +251,6 @@ function interact() {
       console.log('amountToSend:',amountToSend);
      try {
         NftRoj.methods.buySobre().send({ from: addressValueOri, to:addressContract, value: amountToSend }).then(res => {
-        console.log('Dentro buy ');
-        console.log('res: ',res);
-        console.log('events sobreVendido: ', res.events.SobreVendido.returnValues.coleccionOut[1]);
         if (res.status) {
           Toast.fire({
             icon: 'success',
@@ -272,35 +261,40 @@ function interact() {
               Toast.fire({
                   title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[0].nombre,
                   text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[0].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[0].totalVendidos,
-                  imageUrl: res.events.SobreVendido.returnValues.coleccionOut[0].url,
+                 //imageUrl: res.events.SobreVendido.returnValues.coleccionOut[0].url,
+                  imageUrl: './img/cromos/' + res.events.SobreVendido.returnValues[1][0] + '.png',
                   confirmButtonText: 'Siguiente'
               }).then((result) => {
                 if (result.isConfirmed) {
                   Toast.fire({
                     title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[1].nombre,
                     text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[1].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[1].totalVendidos,
-                    imageUrl: res.events.SobreVendido.returnValues.coleccionOut[1].url,
+                    //imageUrl: res.events.SobreVendido.returnValues.coleccionOut[1].url,
+                    imageUrl: './img/cromos/' + res.events.SobreVendido.returnValues[1][1] + '.png',
                     confirmButtonText: 'Siguiente'
                   }).then((result) => {
                     if (result.isConfirmed) {
                       Toast.fire({
                         title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[2].nombre,
                         text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[2].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[2].totalVendidos,
-                        imageUrl: res.events.SobreVendido.returnValues.coleccionOut[2].url,
+                        //imageUrl: res.events.SobreVendido.returnValues.coleccionOut[2].url,
+                        imageUrl: './img/cromos/' + res.events.SobreVendido.returnValues[1][2] + '.png',
                         confirmButtonText: 'Siguiente'
                       }).then((result) => {
                         if (result.isConfirmed) {
                           Toast.fire({
                             title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[3].nombre,
                             text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[3].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[3].totalVendidos,
-                            imageUrl: res.events.SobreVendido.returnValues.coleccionOut[3].url,
+                            //imageUrl: res.events.SobreVendido.returnValues.coleccionOut[3].url,
+                            imageUrl: './img/cromos/' + res.events.SobreVendido.returnValues[1][3] + '.png',
                             confirmButtonText: 'Siguiente'
                           }).then((result) => {
                             if (result.isConfirmed) {
                               Toast.fire({
                                 title: 'Nombre: ' + res.events.SobreVendido.returnValues.coleccionOut[4].nombre,
                                 text: 'Total: ' + res.events.SobreVendido.returnValues.coleccionOut[4].total + ' - Total vendidos: ' + res.events.SobreVendido.returnValues.coleccionOut[4].totalVendidos,
-                                imageUrl: res.events.SobreVendido.returnValues.coleccionOut[4].url
+                               // imageUrl: res.events.SobreVendido.returnValues.coleccionOut[4].url
+                                imageUrl: './img/cromos/' + res.events.SobreVendido.returnValues[1][4] + '.png',
                               })
                             }
                           })
@@ -321,7 +315,6 @@ function interact() {
           //const valueSpan = document.getElementById('balance');
           //valueSpan.innerHTML = res;
         }
-      console.log('3 ');
       }).catch(console.log('Error promise buy'))
      } catch (e) {
       console.log('Error: ', e);
