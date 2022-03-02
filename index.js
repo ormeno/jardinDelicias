@@ -39,6 +39,14 @@ fakeApi = () => {
   ];
 }
 
+app.get('/.well-known/acme-challenge/NQ4-b-Rt7aTQXmITLIsECK0Iddaq_zuUXFEzrC6Jm7Q', (req, res) => {
+  res.render('index', {layout: 'NQ4-b-Rt7aTQXmITLIsECK0Iddaq_zuUXFEzrC6Jm7Q'});
+});
+
+app.get('/.well-known/acme-challenge/mJHB_hy33giu7u7T8F8wVopdpCJR-MgxoH9WXYWWCGs', (req, res) => {
+  res.render('index', {layout: 'mJHB_hy33giu7u7T8F8wVopdpCJR-MgxoH9WXYWWCGs'});
+});
+
 app.get('/', (req, res) => {
     res.render('index', {layout: 'main', suggestedChamps: fakeApi(), listExists: true});
 });
