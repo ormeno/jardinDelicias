@@ -33,7 +33,8 @@ function init() {
       const valueAd = document.getElementById('accountSelected').textContent;    
       if (valueAd.length===0) {
           Toast.fire({        
-          title: 'Por favor, conecta la wallet'
+            icon: 'info',
+          title: 'Por favor, conecta Metamask a la red Polygon'
         })
       }    
     });
@@ -46,7 +47,7 @@ function init() {
     metamaskBtn.addEventListener('click', async() => {
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
       account = accounts[0];
-      console.log('3 account',account);
+     // console.log('3 account',account);
 
       metamaskBtn.classList.add('d-none');
       document.getElementById('accountSelected').innerHTML = account;
@@ -97,9 +98,17 @@ function contract() {
   interact();
 }
 
+function infoErrorRed() {
+  Toast.fire({
+    icon: 'error',
+    title: 'Error',
+    text: 'Valide que está conectado a la red Polygon.'
+   })
+}
+
 function consultarColeccion(idColeccion) {
   try{
-    console.log('consultarColeccion id:', './img/cromos/' + idColeccion + '.png' );
+    //console.log('consultarColeccion id:', './img/cromos/' + idColeccion + '.png' );
     NftRoj.methods.getColeccion(idColeccion).call().then(res => {
     if (res.nombre==='') {
       Toast.fire({
@@ -120,7 +129,7 @@ function consultarColeccion(idColeccion) {
           icon: 'error',
           title: 'Consulta erronea',
           text: 'Valide que está conectado a la red Polygon y que el identificador está entre el 1 y el 160.'
-         })
+        })
        }) 
   } catch (e) {
     console.log('Error: ', e);
@@ -148,7 +157,7 @@ function interact() {
   const btnTuColeccion = document.getElementById('btnTuColeccion');  
   btnTuColeccion.addEventListener('click', () => {
     const addressValueOri = document.getElementById('accountSelected').textContent;
-    console.log('addressValueOri:  ', addressValueOri);
+    //console.log('addressValueOri:  ', addressValueOri);
     NftRoj.methods.walletOfOwner(addressValueOri).call().then(res => {
       const tienes = [];
       const noTienes = []; 
@@ -173,7 +182,10 @@ function interact() {
         }
        })
       
-    })
+    }).catch(e=>{
+      console.log('Error Promise: ', e);
+      infoErrorRed();
+     })
   }); 
    
    
@@ -181,7 +193,7 @@ function interact() {
   btnEspecial.addEventListener('click', () => {
       try{
         const addressValueOri = document.getElementById('accountSelected').textContent;
-        console.log('addressValueOri:  ', addressValueOri);
+       // console.log('addressValueOri:  ', addressValueOri);
         NftRoj.methods.walletOfOwner(addressValueOri).call().then(res => {
           if (res.tieneTodos) {
             NftRoj.methods.getColeccion(idNTFEspecial).call().then(res2 => {
@@ -229,7 +241,10 @@ function interact() {
               title: 'Colección incompleta'
             })
           }
-        }) 
+        }).catch(e=>{
+          console.log('Error Promise: ', e);
+          infoErrorRed();
+         }) 
       } catch (e) {
         console.log('Error: ', e);
         Toast.fire({
@@ -245,10 +260,10 @@ function interact() {
    const compr = document.getElementById('btnComprar');
    compr.addEventListener('click', () => {
       const addressValueOri = document.getElementById('accountSelected').textContent;
-      console.log('Ori:',addressValueOri);
+      //console.log('Ori:',addressValueOri);
       // const amountTransfer = web3.utils.toWei(amountString, 'ether');
       const amountToSend = web3.utils.toWei("0", "ether");
-      console.log('amountToSend:',amountToSend);
+      //console.log('amountToSend:',amountToSend);
      try {
         NftRoj.methods.buySobre().send({ from: addressValueOri, to:addressContract, value: amountToSend }).then(res => {
         if (res.status) {
@@ -315,7 +330,10 @@ function interact() {
           //const valueSpan = document.getElementById('balance');
           //valueSpan.innerHTML = res;
         }
-      }).catch(console.log('Error promise buy'))
+      }).catch(e=>{
+        console.log('Error Promise Comprar: ', e);
+        infoErrorRed();
+       }) 
      } catch (e) {
       console.log('Error: ', e);
     }
