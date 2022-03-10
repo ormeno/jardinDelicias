@@ -120,11 +120,8 @@ function consultarColeccion(idColeccion) {
         text: 'Identificador erroneo. Solo valores del 1 al 160'
       })
     } else {
-      console.log('1');
       const addressValueOri = document.getElementById('accountSelected').textContent;
-      console.log('2');
       NftRoj.methods.balanceOf(addressValueOri,idColeccion).call().then(res2 => {
-        console.log('res2' + res2);
         Toast.fire({
           title: 'Nombre: ' + res.nombre,
           text: 'Total: ' + res.total + ' - Total vendidos: ' + res.totalVendidos + ' - Tuyos: ' + res2,
