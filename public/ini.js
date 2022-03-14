@@ -38,8 +38,8 @@ function init() {
         Swal.fire({
           title: '¡ Metamask no instalado !',
           position: 'top',
-          html: 'Esta web interactua con la blockchain de Polygon, por lo que es necesario que su navegador tenga instalado Metamask (' +
-          '<a target="_blank" href="https://metamask.app.link/dapp/jardindelasdeliciasnft.ga/">Instalar</a>' + ')',
+          html: 'Esta web interactua con la blockchain de Polygon, por lo que es necesario el uso de ' +
+          '<a target="_blank" href="https://metamask.app.link/dapp/jardindelasdeliciasnft.ga/">Metamask</a>',
         });
       } else {
         const valueAd = document.getElementById('accountSelected').textContent;    
