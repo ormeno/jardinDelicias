@@ -30,17 +30,27 @@ function init() {
   validarConnect(document.getElementById('btnTuColeccion'));
   validarConnect(document.getElementById('btnEspecial'));
   validarConnect(document.getElementById('btnConsultar'));
+  validarConnect(document.getElementById('enableEthereumButton'));
 
   function validarConnect(boton){
     boton.addEventListener('click', () => {    
-      const valueAd = document.getElementById('accountSelected').textContent;    
-      if (valueAd.length===0) {
-          Toast.fire({        
-            icon: 'info',
-          title: 'Por favor, conecta Metamask a la red Polygon'
-        })
+      if (typeof window.ethereum == 'undefined') {   
+        Swal.fire({
+          title: '¡ Metamask no instalado !',
+          position: 'top',
+          html: 'Esta web interactua con la blockchain de Polygon, por lo que es necesario que su navegador tenga instalado Metamask <br>' +
+          '<a target="_blank" href="//metamask.app.link/dapp/jardindelasdeliciasnft.ga/">Instalar</a>',
+        });
+      } else {
+        const valueAd = document.getElementById('accountSelected').textContent;    
+        if (valueAd.length===0) {
+            Toast.fire({        
+              icon: 'info',
+            title: 'Por favor, conecta Metamask a la red Polygon'
+          })
+        }
       }    
-    });
+    });  
   }
   
   if (typeof window.ethereum !== 'undefined') {    
@@ -71,13 +81,7 @@ function init() {
       //document.getElementById('login').style.display = 'none';
       //document.getElementById('main').classList.remove('d-none');
     });
-  }  else {
-     Swal.fire({
-      title: '¡ Metamask no instalado !',
-      position: 'top',
-      text: 'Esta web interactua con la blockchain de Polygon, por lo que es necesario que su navegador tenga instalado Metamask'
-    });
-  }
+  }  
 }
 
 
